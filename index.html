@@ -2081,12 +2081,12 @@ function renderHiring(body){
   if(!c){body.innerHTML='<div style="color:var(--text3);text-align:center;padding:30px">No clients yet</div>';return;}
 
   // View toggle
-  html+='<div class="hiring-view-toggle">';
   const _dA=hiringView==='demand'?' active':'';
   const _tA=hiringView==='tracker'?' active':'';
   html+='<div class="hiring-view-toggle">';
   html+='<button class="hvt-btn'+_dA+'" data-v="demand" onclick="setHiringView(this.getAttribute(\"data-v\"))">Demand Plan</button>';
   html+='<button class="hvt-btn'+_tA+'" data-v="tracker" onclick="setHiringView(this.getAttribute(\"data-v\"))">Hiring Tracker</button>';
+  html+='</div>';
 
   if(hiringView==='demand'){
     html+=renderDemandPlan(c);
