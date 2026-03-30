@@ -895,9 +895,11 @@ const dp=S.demandPlan;
     name:'GTM initiatives — campaign planning and execution',
     due:'2026-04-15',priority:'High',status:'inprog',blockerNote:'',
     ownerId:kiran.id,clientVisible:true,source:'manual',
+    comment:'HIMSS campaign concluded Mar 5 — meetings secured. HubSpot DB cleanup underway (removing irrelevant contacts). Next: update HubSpot with new prospect data from recent events.',
     subtasks:[
-      {id:nST++,name:'Target market definition',due:'2026-04-02',ownerId:kiran.id,status:'done'},
-      {id:nST++,name:'Campaign brief finalisation',due:'2026-04-07',ownerId:kiran.id,status:'inprog'},
+      {id:nST++,name:'HIMSS campaign execution',due:'2026-03-05',ownerId:kiran.id,status:'done',comment:'Completed — meetings secured'},
+      {id:nST++,name:'HubSpot database cleanup and rationalisation',due:'2026-04-10',ownerId:kiran.id,status:'inprog',comment:'Removing irrelevant contacts, optimising credit usage'},
+      {id:nST++,name:'Update HubSpot with new prospect data',due:'2026-04-15',ownerId:kiran.id,status:'notstart',comment:'Post-cleanup — data from recent events'},
       {id:nST++,name:'Channel strategy approval',due:'2026-04-10',ownerId:kiran.id,status:'notstart'},
       {id:nST++,name:'Campaign launch',due:'2026-04-15',ownerId:kiran.id,status:'notstart'},
     ]});
@@ -920,9 +922,12 @@ const dp=S.demandPlan;
     name:'L1 visa services — tracking and documentation',
     due:'2026-04-30',priority:'High',status:'inprog',blockerNote:'',
     ownerId:anitha.id,clientVisible:false,source:'manual',
+    comment:'Anitha in active conversation with travel agent and legal team. Coordination ongoing.',
     subtasks:[
-      {id:nST++,name:'Identify L1 candidates',due:'2026-04-05',ownerId:anitha.id,status:'done'},
-      {id:nST++,name:'Documentation collection',due:'2026-04-12',ownerId:anitha.id,status:'inprog'},
+      {id:nST++,name:'Identify L1 candidates',due:'2026-04-05',ownerId:anitha.id,status:'done',comment:'Completed'},
+      {id:nST++,name:'Coordination with travel agent',due:'2026-04-12',ownerId:anitha.id,status:'inprog',comment:'Anitha in conversation with travel agent'},
+      {id:nST++,name:'Legal team coordination',due:'2026-04-12',ownerId:anitha.id,status:'inprog',comment:'Anitha in conversation with legal team'},
+      {id:nST++,name:'Documentation collection',due:'2026-04-15',ownerId:anitha.id,status:'inprog'},
       {id:nST++,name:'Attorney review',due:'2026-04-20',ownerId:anitha.id,status:'notstart'},
       {id:nST++,name:'Filing submission',due:'2026-04-28',ownerId:anitha.id,status:'notstart'},
     ]});
@@ -930,12 +935,14 @@ const dp=S.demandPlan;
   // Others — Cloud Cost Optimisation
   S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxOth.id,
     name:'Cloud cost optimisation — analysis and recommendations',
-    due:'2026-04-15',priority:'Medium',status:'inprog',blockerNote:'',
+    due:'2026-04-15',priority:'Medium',status:'inprog',blockerNote:'IT SPOC on leave today — follow up tomorrow',
     ownerId:mklakshmi.id,clientVisible:false,source:'manual',
+    comment:'Invoice and billing details shared with IT SPOC. Recommendations expected by tomorrow. SPOC on leave today.',
     subtasks:[
-      {id:nST++,name:'Current cloud spend audit',due:'2026-04-05',ownerId:mklakshmi.id,status:'inprog'},
-      {id:nST++,name:'Identify cost reduction opportunities',due:'2026-04-10',ownerId:me.id,status:'notstart'},
-      {id:nST++,name:'Recommendations report',due:'2026-04-13',ownerId:me.id,status:'notstart'},
+      {id:nST++,name:'Current cloud spend audit',due:'2026-04-05',ownerId:mklakshmi.id,status:'done',comment:'Completed'},
+      {id:nST++,name:'Share invoice and billing details with IT SPOC',due:'2026-04-01',ownerId:mklakshmi.id,status:'done',comment:'Shared — SPOC on leave today, recommendations expected tomorrow'},
+      {id:nST++,name:'Recommendations from IT SPOC',due:'2026-04-02',ownerId:me.id,status:'inprog',comment:'Expected by tomorrow — SPOC on leave today'},
+      {id:nST++,name:'Internal review of recommendations',due:'2026-04-13',ownerId:me.id,status:'notstart'},
       {id:nST++,name:'Present to Onyx leadership',due:'2026-04-15',ownerId:me.id,status:'notstart'},
     ]});
 
@@ -944,6 +951,19 @@ const dp=S.demandPlan;
     name:'TA pipeline — no active hiring currently',
     due:'2026-05-01',priority:'Low',status:'notstart',blockerNote:'',
     ownerId:onyxSwaroop?.id||null,clientVisible:false,source:'manual',subtasks:[]});
+
+  // Others — SoW for IX/OHDS
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxOth.id,
+    name:'SoW preparation — IX / OHDS',
+    due:'2026-04-10',priority:'High',status:'inprog',blockerNote:'',
+    ownerId:mklakshmi.id,clientVisible:false,source:'manual',
+    comment:'Lakshmi working on SoW drafts for IX and OHDS. Update expected shortly.',
+    subtasks:[
+      {id:nST++,name:'Draft SoW — IX',due:'2026-04-07',ownerId:mklakshmi.id,status:'inprog',comment:'In progress'},
+      {id:nST++,name:'Draft SoW — OHDS',due:'2026-04-07',ownerId:mklakshmi.id,status:'inprog',comment:'In progress'},
+      {id:nST++,name:'Internal review',due:'2026-04-09',ownerId:mklakshmi.id,status:'notstart'},
+      {id:nST++,name:'Share with client for sign-off',due:'2026-04-10',ownerId:mklakshmi.id,status:'notstart'},
+    ]});
 
 // ═══════════════════════════════════════════
 // RENDER SIDEBAR
