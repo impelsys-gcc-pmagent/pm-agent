@@ -802,6 +802,112 @@ const dp=S.demandPlan;
   {planId:dp[4]?.id,role:'Team Lead',candidateName:'Arvind S.',stage:'interview',offerDate:'',joiningDate:'',comment:'Interviewing with UKG panel',blocker:''},
 ].forEach(h=>S.hiringTracker.push({id:window.nHT++,clientId:ukgCid,...h}));
 
+// ── Onyx Client ──
+  const onyxColor='#60a5fa';
+  const onyxClient={id:nC++,name:'Onyx',color:onyxColor,stage:'Active',since:'Jan 2025',contactEmail:'gokhlevidya@gmail.com'};
+  S.clients.push(onyxClient);
+  const onyxId=onyxClient.id;
+
+  // Onyx team members
+  const niraj={id:nM++,name:'Niraj',role:'Marketing Lead — Website',email:'',services:['Marketing']};
+  const kiran={id:nM++,name:'Kiran',role:'Marketing Lead — GTM',email:'',services:['Marketing']};
+  const anitha={id:nM++,name:'Anitha Nair',role:'HR & Legal Lead',email:'',services:['HR','Others']};
+  const mklakshmi={id:nM++,name:'M K Lakshmi',role:'HR & Cloud Lead',email:'',services:['HR','Others']};
+  [niraj,kiran,anitha,mklakshmi].forEach(m=>S.team.push(m));
+
+  // Onyx uses Swaroop (TA) and Akshay (Finance) from UKG team
+  const onyxSwaroop=S.team.find(m=>m.name==='Swaroop');
+  const onyxAkshay=S.team.find(m=>m.name==='Akshay');
+  const me={id:nM++,name:'Srividya (You)',role:'PM — Cloud Cost',email:'gokhlevidya@gmail.com',services:['Others']};
+  S.team.push(me);
+
+  // Onyx Services
+  const onyxMkt={id:nS++,clientId:onyxId,name:'Marketing',ownerId:niraj.id,
+    scopeDesc:'Website development and GTM initiatives for Onyx GCC.',
+    deliverables:[{text:'Website development milestones',freq:'Weekly'},{text:'GTM campaign execution',freq:'Monthly'},{text:'Marketing status report',freq:'Weekly'}]};
+  const onyxTA={id:nS++,clientId:onyxId,name:'TA',ownerId:onyxSwaroop?.id||null,
+    scopeDesc:'Talent acquisition for Onyx — currently no active hiring.',
+    deliverables:[{text:'Recruitment report',freq:'Monthly'}]};
+  const onyxHR={id:nS++,clientId:onyxId,name:'HR',ownerId:anitha.id,
+    scopeDesc:'HR operations including Zoho HRMS implementation.',
+    deliverables:[{text:'Zoho implementation status',freq:'Weekly'},{text:'HR compliance check',freq:'Monthly'}]};
+  const onyxFin={id:nS++,clientId:onyxId,name:'Finance',ownerId:onyxAkshay?.id||null,
+    scopeDesc:'Finance support for Onyx GCC.',
+    deliverables:[{text:'Monthly accounts',freq:'Monthly'},{text:'Finance report',freq:'Monthly'}]};
+  const onyxOth={id:nS++,clientId:onyxId,name:'Others',ownerId:anitha.id,
+    scopeDesc:'L1 visa services and cloud cost optimisation tracking.',
+    deliverables:[{text:'L1 visa status update',freq:'Weekly'},{text:'Cloud cost optimisation report',freq:'Weekly'}]};
+  [onyxMkt,onyxTA,onyxHR,onyxFin,onyxOth].forEach(s=>S.services.push(s));
+
+  // ── Onyx Tasks ──
+
+  // Marketing — Website
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
+    name:'Website development — design and build for Onyx GCC',
+    due:'2026-04-30',priority:'High',status:'inprog',blockerNote:'',
+    ownerId:niraj.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Finalise wireframes',due:'2026-04-05',ownerId:niraj.id,status:'done'},
+      {id:nST++,name:'Design approval from Onyx',due:'2026-04-10',ownerId:niraj.id,status:'inprog'},
+      {id:nST++,name:'Development sprint 1',due:'2026-04-20',ownerId:niraj.id,status:'notstart'},
+      {id:nST++,name:'UAT and review',due:'2026-04-28',ownerId:niraj.id,status:'notstart'},
+    ]});
+
+  // Marketing — GTM
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
+    name:'GTM initiatives — campaign planning and execution',
+    due:'2026-04-15',priority:'High',status:'inprog',blockerNote:'',
+    ownerId:kiran.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Target market definition',due:'2026-04-02',ownerId:kiran.id,status:'done'},
+      {id:nST++,name:'Campaign brief finalisation',due:'2026-04-07',ownerId:kiran.id,status:'inprog'},
+      {id:nST++,name:'Channel strategy approval',due:'2026-04-10',ownerId:kiran.id,status:'notstart'},
+      {id:nST++,name:'Campaign launch',due:'2026-04-15',ownerId:kiran.id,status:'notstart'},
+    ]});
+
+  // HR — Zoho implementation
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxHR.id,
+    name:'Zoho HRMS implementation',
+    due:'2026-04-30',priority:'High',status:'inprog',blockerNote:'',
+    ownerId:anitha.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Requirements gathering',due:'2026-03-28',ownerId:anitha.id,status:'done'},
+      {id:nST++,name:'Zoho configuration and setup',due:'2026-04-10',ownerId:mklakshmi.id,status:'inprog'},
+      {id:nST++,name:'Data migration from existing system',due:'2026-04-20',ownerId:mklakshmi.id,status:'notstart'},
+      {id:nST++,name:'UAT with HR team',due:'2026-04-25',ownerId:anitha.id,status:'notstart'},
+      {id:nST++,name:'Go live and training',due:'2026-04-30',ownerId:anitha.id,status:'notstart'},
+    ]});
+
+  // Others — L1 Visa
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxOth.id,
+    name:'L1 visa services — tracking and documentation',
+    due:'2026-04-30',priority:'High',status:'inprog',blockerNote:'',
+    ownerId:anitha.id,clientVisible:false,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Identify L1 candidates',due:'2026-04-05',ownerId:anitha.id,status:'done'},
+      {id:nST++,name:'Documentation collection',due:'2026-04-12',ownerId:anitha.id,status:'inprog'},
+      {id:nST++,name:'Attorney review',due:'2026-04-20',ownerId:anitha.id,status:'notstart'},
+      {id:nST++,name:'Filing submission',due:'2026-04-28',ownerId:anitha.id,status:'notstart'},
+    ]});
+
+  // Others — Cloud Cost Optimisation
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxOth.id,
+    name:'Cloud cost optimisation — analysis and recommendations',
+    due:'2026-04-15',priority:'Medium',status:'inprog',blockerNote:'',
+    ownerId:mklakshmi.id,clientVisible:false,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Current cloud spend audit',due:'2026-04-05',ownerId:mklakshmi.id,status:'inprog'},
+      {id:nST++,name:'Identify cost reduction opportunities',due:'2026-04-10',ownerId:me.id,status:'notstart'},
+      {id:nST++,name:'Recommendations report',due:'2026-04-13',ownerId:me.id,status:'notstart'},
+      {id:nST++,name:'Present to Onyx leadership',due:'2026-04-15',ownerId:me.id,status:'notstart'},
+    ]});
+
+  // TA — no active tasks
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxTA.id,
+    name:'TA pipeline — no active hiring currently',
+    due:'2026-05-01',priority:'Low',status:'notstart',blockerNote:'',
+    ownerId:onyxSwaroop?.id||null,clientVisible:false,source:'manual',subtasks:[]});
+
 // ═══════════════════════════════════════════
 // RENDER SIDEBAR
 // ═══════════════════════════════════════════
