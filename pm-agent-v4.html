@@ -841,16 +841,53 @@ const dp=S.demandPlan;
 
   // ── Onyx Tasks ──
 
-  // Marketing — Website
+  // Marketing — Website (real plan from tracker)
+  // Phase 1: Discovery
   S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
-    name:'Website development — design and build for Onyx GCC',
-    due:'2026-04-30',priority:'High',status:'inprog',blockerNote:'',
+    name:'Website redesign — Discovery phase',
+    due:'2026-03-27',priority:'High',status:'inprog',blockerNote:'',
     ownerId:niraj.id,clientVisible:true,source:'manual',
     subtasks:[
-      {id:nST++,name:'Finalise wireframes',due:'2026-04-05',ownerId:niraj.id,status:'done'},
-      {id:nST++,name:'Design approval from Onyx',due:'2026-04-10',ownerId:niraj.id,status:'inprog'},
-      {id:nST++,name:'Development sprint 1',due:'2026-04-20',ownerId:niraj.id,status:'notstart'},
-      {id:nST++,name:'UAT and review',due:'2026-04-28',ownerId:niraj.id,status:'notstart'},
+      {id:nST++,name:'Kickoff',due:'2026-02-16',ownerId:niraj.id,status:'done',comment:'HIMSS microsite prioritised first'},
+      {id:nST++,name:'Sitemap and IA',due:'2026-03-27',ownerId:niraj.id,status:'inprog',comment:'Sitemap pages to be refreshed/redesigned/removed finalised — 70%'},
+      {id:nST++,name:'Content readiness',due:'2026-03-27',ownerId:niraj.id,status:'inprog',comment:'Kate working on mockups for redesign pages — 50%'},
+    ]});
+
+  // Phase 2: Design
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
+    name:'Website redesign — Design phase',
+    due:'2026-04-10',priority:'High',status:'inprog',
+    blockerNote:'Waiting on Kate mockups — design signoff blocked until received',
+    ownerId:niraj.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Wireframes',due:'2026-04-07',ownerId:niraj.id,status:'inprog',comment:'Homepage wireframe mockup under review — 10%'},
+      {id:nST++,name:'Design signoff',due:'2026-04-10',ownerId:niraj.id,status:'notstart',comment:'Pending Kate mockups'},
+    ]});
+
+  // Phase 3: Build
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
+    name:'Website redesign — Build phase',
+    due:'2026-04-20',priority:'High',status:'inprog',
+    blockerNote:'April 20 event — key pages must go live. Full launch May 7.',
+    ownerId:niraj.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'Environment setup',due:'2026-02-12',ownerId:niraj.id,status:'done'},
+      {id:nST++,name:'Page development',due:'2026-04-16',ownerId:niraj.id,status:'inprog',comment:'Brand guideline refresh pages in progress — 30%'},
+      {id:nST++,name:'HubSpot form integration',due:'2026-04-17',ownerId:niraj.id,status:'inprog',comment:'13% complete'},
+      {id:nST++,name:'SEO and optimisation',due:'2026-04-20',ownerId:niraj.id,status:'inprog',comment:'Initial SEO guidelines shared — 30%'},
+    ]});
+
+  // Phase 4: Test + Launch
+  S.tasks.push({id:nT++,clientId:onyxId,svcId:onyxMkt.id,
+    name:'Website redesign — Test and Launch',
+    due:'2026-05-07',priority:'High',status:'notstart',blockerNote:'',
+    ownerId:niraj.id,clientVisible:true,source:'manual',
+    subtasks:[
+      {id:nST++,name:'QA and UAT',due:'2026-04-29',ownerId:niraj.id,status:'notstart'},
+      {id:nST++,name:'Fixes',due:'2026-05-05',ownerId:niraj.id,status:'notstart'},
+      {id:nST++,name:'Go live — key pages for April 20 event',due:'2026-04-20',ownerId:niraj.id,status:'notstart',comment:'Partial launch if full rollout not ready'},
+      {id:nST++,name:'Full site go live',due:'2026-05-07',ownerId:niraj.id,status:'notstart'},
+      {id:nST++,name:'Post-launch support',due:'2026-05-15',ownerId:niraj.id,status:'notstart'},
     ]});
 
   // Marketing — GTM
