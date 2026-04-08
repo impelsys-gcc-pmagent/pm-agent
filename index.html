@@ -1388,11 +1388,11 @@ async function analyseEmail(id){
   addAIMsg('Analysing email with AI...');
   const sys='You are a PM Agent. Analyse this email and return ONLY valid JSON in this exact format: {"sentiment":{"label":"urgent|frustrated|happy|neutral","summary":"one sentence"},"tasks":[{"name":"string","priority":"High|Medium|Low","service":"HR|Finance|TA|Legal|IT|Operations","dueHint":"string or null"}],"decisions":[{"text":"string"}],"followUps":[{"text":"string","waitingOn":"us|client"}],"draftReply":"string — professional reply acknowledging the email and key points"}';
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,
-        messages:[{role:'user',content:'From: '+em.from+' Subject: '+em.subject+' Body: '+em.body+' Client context: '+S.clients.map(c=>c.name).join(', ')}]})});
+    const res=await fetch(HEIMDALL_URL,{method:'POST',headers:{'Content-Type':'application/json','Authorization':HEIMDALL_KEY},
+      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,
+        messages:[{role:'system',content:sys},{role:'user',content:'From: '+em.from+' Subject: '+em.subject+' Body: '+em.body+' Client context: '+S.clients.map(c=>c.name).join(', ')}]})});
     const data=await res.json();
-    const txt=data.content?.[0]?.text||'{}';
+    const txt=data.choices?.[0]?.message?.content||data.content?.[0]?.text||'{}';
     const parsed=JSON.parse(txt.replace(/```json|```/g,'').trim());
     let existing=S.reviewTray.find(r=>r.emailId===id);
     if(!existing){existing={emailId:id,suggested:parsed,draftReply:parsed.draftReply||'',approved:false};S.reviewTray.push(existing);}
@@ -1862,17 +1862,28 @@ function sendQuick(t){document.getElementById('chatIn').value=t;sendMsg();}
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMsg();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
 
+const HEIMDALL_URL='https://heimdall.impelsys-innovationlab.com/v1/chat/completions';
+const HEIMDALL_KEY='Bearer sk-JyRqw5z-MLqRsnxvpqd1NA';
+
 async function callAI(msg){
   const sys=buildSystemPrompt();
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:800,system:sys,
-        messages:[...S.chatHistory.slice(-10).map(m=>({role:m.role,content:typeof m.content==='string'?m.content.replace(/<[^>]+>/g,''):m.content})),{role:'user',content:msg}]})
+    const res=await fetch(HEIMDALL_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':HEIMDALL_KEY},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        messages:[
+          {role:'system',content:sys},
+          ...S.chatHistory.slice(-10).map(m=>({role:m.role,content:typeof m.content==='string'?m.content.replace(/<[^>]+>/g,''):m.content})),
+          {role:'user',content:msg}
+        ]
+      })
     });
     const data=await res.json();
-    return data.content?.[0]?.text||'Could not process that.';
-  }catch(e){return 'Could not reach AI — check connection.';}
+    return data.choices?.[0]?.message?.content||data.content?.[0]?.text||'Could not process that.';
+  }catch(e){return 'Could not reach AI — check connection: '+e.message;}
 }
 
 function buildSystemPrompt(){
